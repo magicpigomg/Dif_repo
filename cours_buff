@@ -10,6 +10,28 @@ r = requests.get(url).json()
 
 q = r.get('data').get('buff_price_currency_rate_base_cny')
 
-print(q)
+buff_params = {
+    'page_num': 1,
+    'page_size': 20
+}
+
+buff_url = 'https://buff.163.com/api/market/goods?game=csgo'
+
+f = requests.get(buff_url, params=buff_params,
+                 headers=headers, cookies=cookies_buff).json()
+
+a = f.get('data').get('items')
+
+count = 1
+for i in a:
+    name = i['name']
+    sell_min_price = float(i['sell_min_price'])
+
+    print(
+        f'{count}. {name}\n'
+        f'{round(sell_min_price * float(q), 2)}'
+    )
+    count += 1
+
 
 # Use cookies and user-agent
