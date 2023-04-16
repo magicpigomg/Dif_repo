@@ -1,0 +1,15 @@
+import requests
+from bs4 import BeautifulSoup as bs
+from fake_useragent import UserAgent
+
+ua = UserAgent()
+
+url = f'https://buff.163.com/account/api/user/info?_=1681655976590'
+
+r = requests.get(url).json()
+
+q = r.get('data').get('buff_price_currency_rate_base_cny')
+
+print(q)
+
+# Use cookies and user-agent
